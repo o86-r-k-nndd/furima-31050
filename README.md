@@ -1,6 +1,7 @@
 # DB設計
 
 ## users table
+ユーザー管理機能
 
 | Column          | Type    | Options     |
 | --------------- | ------- | ----------- |
@@ -20,6 +21,7 @@ _ has_many   :items
 _ belongs_to :order
 
 ## items table
+商品出品機能
 
 | Column        | Type         | Options                        |
 | ------------- | ------------ | ------------------------------ |
@@ -39,6 +41,7 @@ _ belongs_to  :user
 _ has_one     :order
 
 ## orders table
+商品購入機能
 
 | Column         | Type       | Options                        |
 | -------------- | ---------- | ------------------------------ |
