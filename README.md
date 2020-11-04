@@ -54,14 +54,16 @@ _ has_one    :address
 ## addresses table
 商品者住所情報
 
-| Column         | Type       | Options     |
-| -------------- | ---------- | ----------- |
-| postal_code    | string     | null: false |
-| municipalities | string     | null: false |
-| address        | string     | null: false |
-| building_name  | string     |             |
-| phone_number   | string     | null: false |
-| prefectures_id | integer    | null: false |
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| postal_code    | string     | null: false                    |
+| municipalities | string     | null: false                    |
+| address        | string     | null: false                    |
+| building_name  | string     |                                |
+| phone_number   | string     | null: false                    |
+| prefectures_id | integer    | null: false                    |
+| order          | references | null: false, foreign_key: true |
+
 
 ### Association
 _ belongs_to :order
