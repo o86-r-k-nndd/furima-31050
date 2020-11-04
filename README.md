@@ -17,7 +17,7 @@
 
 ### Association
 _ has_many :items
-_ has_many :order
+_ has_many :orders
 
 ## items table
 商品出品機能
@@ -38,20 +38,30 @@ _ has_many :order
 _ belongs_to  :user
 _ has_one     :order
 
-## orders table
-商品購入機能
+# order table
+購入者の情報
 
 | Column         | Type       | Options                        |
 | -------------- | ---------- | ------------------------------ |
-| postal_code    | string     | null: false                    |
-| prefectures    | string     | null: false                    |
-| municipalities | string     | null: false                    |
-| address        | string     | null: false                    |
-| building_name  | string     | null: false                    |
-| phone_number   | integer    | null: false                    |
 | user           | references | null: false, foreign_key: true |
 | item           | references | null: false, foreign_key: true |
 
 ### Association
 _ belongs_to :user
 _ belongs_to :item
+_ belongs_to :address
+
+## addresses table
+商品者住所情報
+
+| Column         | Type       | Options     |
+| -------------- | ---------- | ----------- |
+| postal_code    | string     | null: false |
+| prefectures    | string     | null: false |
+| municipalities | string     | null: false |
+| address        | string     | null: false |
+| building_name  | string     | null: false |
+| phone_number   | integer    | null: false |
+
+### Association
+_ belongs_to :order
