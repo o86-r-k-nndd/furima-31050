@@ -49,7 +49,7 @@ _ has_one     :order
 ### Association
 _ belongs_to :user
 _ belongs_to :item
-_ has_many   :address
+_ has_one    :address
 
 ## addresses table
 商品者住所情報
