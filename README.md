@@ -64,4 +64,4 @@ _ has_one    :address
 | prefectures_id | integer    | null: false |
 
 ### Association
-_ belongs_to :orders
+_ belongs_to :order
