@@ -3,38 +3,36 @@
 ## users table
 ユーザー管理機能
 
-| Column          | Type    | Options     |
-| --------------- | ------- | ----------- |
-| nickname        | string  | null: false |
-| email           | string  | null: false |
-| password        | string  | null: false |
-| first_name      | string  | null: false |
-| last_name       | string  | null: false |
-| first_name_kana | string  | null: false |
-| last_name_kana  | string  | null: false |
-| birthday_year   | integer | null: false |
-| birthday_month  | integer | null: false |
-| birthday_day    | integer | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------- | ----------- |
+| nickname           | string  | null: false |
+| email              | string  | null: false |
+| encrypted_password | string  | null: false |
+| first_name         | string  | null: false |
+| last_name          | string  | null: false |
+| first_name_kana    | string  | null: false |
+| last_name_kana     | string  | null: false |
+| birthday           | date    | null: false |
+
 
 ### Association
-_ has_many   :items
-_ belongs_to :order
+_ has_many :items
+_ has_many :order
 
 ## items table
 商品出品機能
 
-| Column        | Type         | Options                        |
-| ------------- | ------------ | ------------------------------ |
-| image         | ActiveRecord | null: false                    |
-| explanation   | text         | null: false                    |
-| name          | string       | null: false                    |
-| category      | string       | null: false                    |
-| status        | string       | null: false                    |
-| shipping      | string       | null: false                    |
-| delivery_area | string       | null: false                    |
-| delivery_days | string       | null: false                    |
-| price         | integer      | null: false                    |
-| user_id       | references   | null: false, foreign_key: true |
+| Column           | Type         | Options                        |
+| ---------------- | ------------ | ------------------------------ |
+| explanation      | text         | null: false                    |
+| name             | string       | null: false                    |
+| category_id      | integer      | null: false                    |
+| status_id        | integer      | null: false                    |
+| shipping_id      | integer      | null: false                    |
+| delivery_area_id | integer      | null: false                    |
+| delivery_days_id | integer      | null: false                    |
+| price            | integer      | null: false                    |
+| user             | references   | null: false, foreign_key: true |
 
 ### Association
 _ belongs_to  :user
@@ -51,8 +49,8 @@ _ has_one     :order
 | address        | string     | null: false                    |
 | building_name  | string     | null: false                    |
 | phone_number   | integer    | null: false                    |
-| user_id        | references | null: false, foreign_key: true |
-| item_id        | references | null: false, foreign_key: true |
+| user           | references | null: false, foreign_key: true |
+| item           | references | null: false, foreign_key: true |
 
 ### Association
 _ belongs_to :user
