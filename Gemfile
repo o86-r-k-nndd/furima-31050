@@ -58,6 +58,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #bindnig.pry 使える様に
 gem 'pry-rails'
 
+#Deviseを使える様に
+gem 'devise'
+
 #herokuの静的アセットやログの調整
 group :production do
   gem 'rails_12factor'
