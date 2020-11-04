@@ -38,7 +38,7 @@ _ has_many :orders
 _ belongs_to  :user
 _ has_one     :order
 
-# order table
+# orders table
 購入者の情報
 
 | Column         | Type       | Options                        |
@@ -56,12 +56,12 @@ _ belongs_to :address
 
 | Column         | Type       | Options     |
 | -------------- | ---------- | ----------- |
-| postal_code    | string     | null: false |
-| prefectures    | string     | null: false |
 | municipalities | string     | null: false |
 | address        | string     | null: false |
-| building_name  | string     | null: false |
+| building_name  | string     |             |
 | phone_number   | integer    | null: false |
+| postal_code_id | integer    | null: false |
+| prefectures_id | integer    | null: false |
 
 ### Association
 _ belongs_to :order
