@@ -1,24 +1,69 @@
-# README
+# DB設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users table
+ユーザー管理機能
 
-Things you may want to cover:
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| nickname           | string  | null: false               |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
+| first_name         | string  | null: false               |
+| last_name          | string  | null: false               |
+| first_name_kana    | string  | null: false               |
+| last_name_kana     | string  | null: false               |
+| birthday           | date    | null: false               |
 
-* Ruby version
 
-* System dependencies
+### Association
+_ has_many :items
+_ has_many :orders
 
-* Configuration
+## items table
+商品出品機能
 
-* Database creation
+| Column           | Type         | Options                        |
+| ---------------- | ------------ | ------------------------------ |
+| explanation      | text         | null: false                    |
+| name             | string       | null: false                    |
+| category_id      | integer      | null: false                    |
+| status_id        | integer      | null: false                    |
+| shipping_id      | integer      | null: false                    |
+| delivery_area_id | integer      | null: false                    |
+| delivery_days_id | integer      | null: false                    |
+| price            | integer      | null: false                    |
+| user             | references   | null: false, foreign_key: true |
 
-* Database initialization
+### Association
+_ belongs_to  :user
+_ has_one     :order
 
-* How to run the test suite
+# orders table
+購入者の情報
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| user           | references | null: false, foreign_key: true |
+| item           | references | null: false, foreign_key: true |
 
-* Deployment instructions
+### Association
+_ belongs_to :user
+_ belongs_to :item
+_ has_one    :address
 
-* ...
+## addresses table
+商品者住所情報
+
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| postal_code    | string     | null: false                    |
+| municipalities | string     | null: false                    |
+| address        | string     | null: false                    |
+| building_name  | string     |                                |
+| phone_number   | string     | null: false                    |
+| prefectures_id | integer    | null: false                    |
+| order          | references | null: false, foreign_key: true |
+
+
+### Association
+_ belongs_to :order
