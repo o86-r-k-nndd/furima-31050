@@ -49,7 +49,7 @@ _ has_one     :order
 ### Association
 _ belongs_to :user
 _ belongs_to :item
-_ belongs_to :address
+_ has_many   :address
 
 ## addresses table
 商品者住所情報
@@ -60,8 +60,8 @@ _ belongs_to :address
 | municipalities | string     | null: false |
 | address        | string     | null: false |
 | building_name  | string     |             |
-| phone_number   | integer    | null: false |
+| phone_number   | string     | null: false |
 | prefectures_id | integer    | null: false |
 
 ### Association
-_ has_many :orders
+_ belongs_to :orders
