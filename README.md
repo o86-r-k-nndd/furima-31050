@@ -56,11 +56,11 @@ _ belongs_to :address
 
 | Column         | Type       | Options     |
 | -------------- | ---------- | ----------- |
+| postal_code    | string     | null: false |
 | municipalities | string     | null: false |
 | address        | string     | null: false |
 | building_name  | string     |             |
 | phone_number   | integer    | null: false |
-| postal_code_id | integer    | null: false |
 | prefectures_id | integer    | null: false |
 
 ### Association
