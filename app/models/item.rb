@@ -5,10 +5,10 @@ class Item < ApplicationRecord
 
   #Assciation ActiveHash
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category
-  belongs_to :status
-  belongs_to :shipping
-  belongs_to :delivery_area
-  belongs_to :delivery_day
-  
+  belongs_to_active_hash :category
+  belongs_to_active_hash :status
+  belongs_to_active_hash :shipping
+  belongs_to_active_hash :delivery_area
+  belongs_to_active_hash :delivery_day
+
 end
