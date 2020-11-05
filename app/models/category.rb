@@ -1,4 +1,6 @@
 class Category < ActiveHash::Base
+
+  # 商品のカテゴリーの情報
   self.data = [
     { id: 1,  name: '---' },
     { id: 2,  name: 'レディース' },
@@ -12,4 +14,9 @@ class Category < ActiveHash::Base
     { id: 10, name: 'ハンドメイド' },
     { id: 11, name: 'その他' }
   ]
+
+  # Assciation item
+  include ActiveHash::Associations
+  has_many :items
+
 end
