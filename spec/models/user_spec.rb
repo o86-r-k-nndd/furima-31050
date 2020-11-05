@@ -51,8 +51,14 @@ RSpec.describe User, type: :model do
     end
 
     it "passworfは半角英数字混合での入力が必須である事" do
+      #数字のみ
       @user.password = "123456"
       @user.password_confirmation = "123456"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
+      #英語のみ
+      @user.password = "abcdefg"
+      @user.password_confirmation = "abcdefg"
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is invalid")
     end
@@ -69,7 +75,6 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
-
     ## //登録情報/ユーザー情報
 
     ## 登録情報/本人情報確認
@@ -85,14 +90,32 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Last name can't be blank")
     end
 
-    it "名字は全角(漢字、ひらがな、カタカナ)での入力が必須である事" do
+    it "名字は全角(漢字、ひらがな、カタカナ)でのみの入力が必須である事" do
+      #英語のみ
       @user.first_name = "abc"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name is invalid")
+      #数字のみ
+      @user.first_name = "123"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name is invalid")
+      #混合
+      @user.first_name = "1aあ壱ア"
       @user.valid?
       expect(@user.errors.full_messages).to include("First name is invalid")
     end
 
-    it "名前は全角(漢字、ひらがな、カタカナ)での入力が必須である" do
+    it "名前は全角(漢字、ひらがな、カタカナ)でのみの入力が必須である" do
+      #英語のみ
       @user.last_name = "abc"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name is invalid")
+      #数字のみ
+      @user.last_name = "123"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name is invalid")
+      #混合
+      @user.last_name = "1aあ壱ア"
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name is invalid")
     end
@@ -110,13 +133,31 @@ RSpec.describe User, type: :model do
     end
 
     it "名字のフリガナはカタカナで入力する必要がある" do
+      #ひらがなのみ
       @user.first_name_kana = "あいう"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana is invalid")
+      #漢字のみ
+      @user.first_name_kana = "一二三"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana is invalid")
+      #混合
+      @user.first_name_kana = "一あア"
       @user.valid?
       expect(@user.errors.full_messages).to include("First name kana is invalid")
     end
 
     it "名前のフリガナはカタカナで入力する必要がある" do
+      #ひらがなのみ
       @user.last_name_kana = "あいう"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name kana is invalid")
+      #漢字のみ
+      @user.last_name_kana = "一二三"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name kana is invalid")
+      #混合
+      @user.last_name_kana = "一あア"
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name kana is invalid")
     end
