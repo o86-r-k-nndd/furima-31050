@@ -35,8 +35,19 @@ _ has_many :orders
 | user             | references   | null: false, foreign_key: true |
 
 ### Association
-_ belongs_to  :user
-_ has_one     :order
+_ belongs_to           :user
+_ has_one              :order
+
+### Association ActiveStorage
+_ has_one_attached     :image
+
+### Association ActiveHash
+belongs_to_active_hash :category
+belongs_to_active_hash :status
+belongs_to_active_hash :shipping
+belongs_to_active_hash :delivery_area
+belongs_to_active_hash :delivery_day
+
 
 # orders table
 購入者の情報
