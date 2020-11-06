@@ -67,6 +67,13 @@ gem 'pry-rails'
 #Deviseを使える様に
 gem 'devise'
 
+#ActiveStorege install
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
+
+#ActiveHash install
+gem 'active_hash'
+
 #herokuの静的アセットやログの調整
 group :production do
   gem 'rails_12factor'
