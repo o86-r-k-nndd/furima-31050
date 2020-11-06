@@ -13,13 +13,20 @@ class ItemsController < ApplicationController
   end
 
   def create
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      @item.valid?
+      render :new
+    end
   end
 
   private
 
   #ストロングパラメーターの設定
   def item_params
-    params.require(:item).permit( :explantion,
+    params.require(:item).permit( :explanation,
                                   :name,
                                   :category_id,
                                   :status_id,
