@@ -52,7 +52,4 @@ class DeliveryArea < ActiveHash::Base
     { id: 48, name: '沖縄県' }
   ]
 
-  # Assciation item
-  include ActiveHash::Associations
-  has_many :items
 end
