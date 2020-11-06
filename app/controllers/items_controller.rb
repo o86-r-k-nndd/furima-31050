@@ -1,6 +1,16 @@
 class ItemsController < ApplicationController
+
+  #ログインしていない場合出品画面には遷移せず、ログイン画面に遷移する
+  before_action :authenticate_user!, only: [:new]
+
+  #top page
   def index
   end
+
+  #商品出品ページ
+  def new
+  end
+
   private
 
   #ストロングパラメーターの設定
