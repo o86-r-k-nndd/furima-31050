@@ -4,7 +4,6 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   describe '#new' do
     before do
-      user = FactoryBot.create(:user)
       @item = FactoryBot.build(:item)
     end
 
@@ -97,7 +96,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Price can't be blank")
     end
 
-    it "価格は300~9999999の間である必要がある" do
+    it "価格は￥300~￥9999999の間である必要がある" do
       #300未満
       @item.price = 123
       @item.valid?
@@ -108,8 +107,13 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
     end
 
-    it "価格は数値での入力が必須である" do
+    it "価格は数値での入力(半角数字のみ)が必須である" do
+      #数値以外
       @item.price = "abc"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is not a number")
+      #全角数字の入力
+      @item.price = "１２３４５６"
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is not a number")
     end
