@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
 
   #Assciation ActiveStorege
-  has_one_attached :image
+  has_one_attached :image, presence: true
 
   #Assciation ActiveHash
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -13,7 +13,6 @@ class Item < ApplicationRecord
 
   #validation not null
   with_option presence: true do
-    validates :image
     validates :explanation
     validates :name
     validates :category_id
