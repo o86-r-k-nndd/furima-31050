@@ -9,6 +9,10 @@ class ItemsController < ApplicationController
 
   #商品出品ページ
   def new
+    @item = Item.new
+  end
+
+  def create
   end
 
   private
