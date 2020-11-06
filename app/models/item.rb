@@ -15,6 +15,10 @@ class Item < ApplicationRecord
   with_option presence: true do
     validates :explanation
     validates :name
+  end
+
+  #validation not null ジャンル選択時[---]の時は保存できない様にする
+  with_option presence: true, numericality: { other_than: 1 } do
     validates :category_id
     validates :status_id
     validates :shipping_id
