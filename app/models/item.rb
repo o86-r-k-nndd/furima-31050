@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
 
   #Assciation ActiveStorege
-  has_one_attached :image, presence: true
+  has_one_attached :image
 
   #Assciation ActiveHash
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -12,13 +12,14 @@ class Item < ApplicationRecord
   belongs_to_active_hash :delivery_day
 
   #validation not null
-  with_option presence: true do
+  with_options presence: true do
+    validates :image
     validates :explanation
     validates :name
   end
 
   #validation not null ジャンル選択時[---]の時は保存できない様にする
-  with_option presence: true, numericality: { other_than: 1 } do
+  with_options presence: true, numericality: { other_than: 1 } do
     validates :category_id
     validates :status_id
     validates :shipping_id
@@ -29,7 +30,7 @@ class Item < ApplicationRecord
   #validation not null 半角数字のみ カラムの型はinteger型のみ 最小値(300)、最大値(9,999,999)の制約
   validates :price, presence:                                   true,
                     format:       { with:                       /\A[0-9]+\z/ },
-                    nemericality: { only_integer:               true,
+                    numericality: { only_integer:               true,
                                     greater_than_or_equal_to:   300,
                                     less_than_or_equal_to:      9999999}
 
