@@ -19,13 +19,19 @@ RSpec.describe Item, type: :model do
     end
     ## //商品情報/ActiveStorage
   
-    ## 商品情報/商品名
+    ## 商品情報
     it "商品名が必須である" do
       @item.name = nil
       @item.valid?
       expect(@item.errors.full_messages).to include("Name can't be blank")
     end
-    ## //商品情報/商品名
+
+    it "商品には説明文が必須である" do
+      @item.explanation = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Explanation can't be blank")
+    end
+    ## //商品情報
 
     ## 商品情報/ActiveHash
     it "カテゴリーの入力が必須である" do

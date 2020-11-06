@@ -14,10 +14,13 @@ function itemPrice() {
     // 販売利益の要素の取得
     const addProfitDom = document.getElementById("profit");
 
+    // 販売手数料を計算する処理
+    const taxValue = ( ( inputValue / 100 ) * 10 )
+
     // 販売手数料の表示処理(手数料10%)
-    addTaxDom.innerHTML = Math.floor( (inputValue / 100) * 10 )
+    addTaxDom.innerHTML = Math.floor( taxValue )
     // 販売利益の表示処理(金額 - 手数料)
-    addProfitDom.innerHTML = Math.ceil( inputValue - ( (inputValue / 100) * 10 ) )
+    addProfitDom.innerHTML = Math.ceil( inputValue - taxValue )
 
   })
 }
