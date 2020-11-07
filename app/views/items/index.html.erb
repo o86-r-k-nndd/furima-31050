@@ -128,8 +128,10 @@
 
       <%# 商品の情報があるかどうか判断する %>
       <% if @items.present? %>
-      <%# 商品の一覧表示 繰り返し処理 %>
+
+        <%# 商品の一覧表示 繰り返し処理 %>
         <% @items.each do |item| %>
+
           <li class='list'>
             <%= link_to "#" do %>
             <div class='item-img-content'>
@@ -137,16 +139,18 @@
 
               <div class='sold-out'>
                 <%# 今回の実装条件に含まれていないので非表示にする%>
-                <%# <span>Sold Out!!</span> %>
+                <%# if 購入されていた時の処理 %>
+                  <%# <span>Sold Out!!</span> %>
+                <%# end %>
               </div>
 
             </div>
             <div class='item-info'>
               <h3 class='item-name'>
-                <%= "商品名" %>
+                <%= item.name %>
               </h3>
               <div class='item-price'>
-                <span><%= "販売価格" %>円<br><%= '配送料負担' %></span>
+                <span><%= item.price %>円<br><%= Shipping.find_by_id(item.shipping_id).name %></span>
                 <div class='star-btn'>
                   <%= image_tag "star.png", class:"star-icon" %>
                   <span class='star-count'>0</span>
