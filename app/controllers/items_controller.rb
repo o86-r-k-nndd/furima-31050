@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
 
   #top page
   def index
-    @items = Item.all
+    @items = Item.all.order(id: :DESC)
   end
 
   #商品出品ページ
