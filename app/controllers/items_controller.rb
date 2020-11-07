@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 
   #top page
   def index
+    @items = Item.all
   end
 
   #商品出品ページ
