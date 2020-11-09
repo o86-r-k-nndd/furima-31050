@@ -30,7 +30,7 @@ _ has_many :orders
 | status_id        | integer      | null: false                    |
 | shipping_id      | integer      | null: false                    |
 | delivery_area_id | integer      | null: false                    |
-| delivery_days_id | integer      | null: false                    |
+| delivery_day_id  | integer      | null: false                    |
 | price            | integer      | null: false                    |
 | user             | references   | null: false, foreign_key: true |
 
