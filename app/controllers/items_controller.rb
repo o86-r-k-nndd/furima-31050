@@ -36,6 +36,13 @@ class ItemsController < ApplicationController
 
   #データベースの情報を更新する
   def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to action: :show
+    else
+      @item.valid?
+      render :edit
+    end
   end
 
   private
