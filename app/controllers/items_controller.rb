@@ -1,7 +1,10 @@
 class ItemsController < ApplicationController
 
-  #ログインしていない場合出品画面には遷移せず、ログイン画面に遷移する
-  before_action :authenticate_user!, only: [:new]
+  #特定のアクションにのみログインしていない場合はログイン画面に遷移する処理を行う
+  before_action :authenticate_user!, only: [:new, :edit]
+
+  #モデルのインスタンスの生成
+  before_action :set_item_find, only: [:show, :edit, :update]
 
   #top page
   def index
@@ -13,6 +16,7 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
+  #データベースへ値を保存する
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -25,7 +29,26 @@ class ItemsController < ApplicationController
 
   #商品詳細ページ
   def show
-    @item = Item.find(params[:id])
+  end
+
+  #商品編集ページ
+  def edit
+
+    #出品者とは違うユーザーが編集ページへ遷移しようとした時はトップページへ遷移する
+    unless current_user.id == @item.user_id
+      redirect_to root_path
+    end
+
+  end
+
+  #データベースの情報を更新する
+  def update
+    if @item.update(item_params)
+      redirect_to action: :show
+    else
+      @item.valid?
+      render :edit
+    end
   end
 
   private
@@ -45,4 +68,10 @@ class ItemsController < ApplicationController
                                   user_id: current_user.id
                                 )
   end
+
+  #Itemモデルの特定のテーブルの値を取得
+  def set_item_find
+    @item = Item.find(params[:id])
+  end
+
 end
