@@ -28,6 +28,14 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  #商品編集ページ
+  def edit
+  end
+
+  #編集した情報をアップデートする
+  def update
+  end
+
   private
 
   #ストロングパラメーターの設定
