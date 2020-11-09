@@ -26,12 +26,12 @@ class ItemsController < ApplicationController
 
   #商品詳細ページ
   def show
-    @item = Item.find(params[:id])
+    set_item_find
   end
 
   #商品編集ページ
   def edit
-    @item = Item.find(params[:id])
+    set_item_find
 
     #出品者とは違うユーザーが編集ページへ遷移しようとした時はトップページへ遷移する
     unless current_user.id == @item.user_id
@@ -42,7 +42,7 @@ class ItemsController < ApplicationController
 
   #データベースの情報を更新する
   def update
-    @item = Item.find(params[:id])
+    set_item_find
     if @item.update(item_params)
       redirect_to action: :show
     else
@@ -68,4 +68,10 @@ class ItemsController < ApplicationController
                                   user_id: current_user.id
                                 )
   end
+
+  #Itemモデルの特定のテーブルの値を取得
+  def set_item_find
+    @item = Item.find(params[:id])
+  end
+
 end
