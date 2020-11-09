@@ -27,7 +27,7 @@ class Item < ApplicationRecord
     validates :status_id
     validates :shipping_id
     validates :delivery_area_id
-    validates :delivery_days_id
+    validates :delivery_day_id
   end
 
   #validation not null 半角数字のみ カラムの型はinteger型のみ 最小値(300)、最大値(9,999,999)の制約

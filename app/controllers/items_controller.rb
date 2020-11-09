@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
                                   :status_id,
                                   :shipping_id,
                                   :delivery_area_id,
-                                  :delivery_days_id,
+                                  :delivery_day_id,
                                   :price,
                                   :image
                                 ).merge(
