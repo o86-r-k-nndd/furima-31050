@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
 
   #特定のアクションにのみログインしていない場合はログイン画面に遷移する処理を行う
-  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
 
   #モデルのインスタンスの生成
-  before_action :set_item_find, only: [:show, :edit, :update]
+  before_action :set_item_find, only: [:show, :edit, :update, :destroy]
 
   #top page
   def index
@@ -49,6 +49,12 @@ class ItemsController < ApplicationController
       @item.valid?
       render :edit
     end
+  end
+
+  #出品された商品を削除する
+  def destroy
+    @item.destroy
+    redirect_to root_path
   end
 
   private
