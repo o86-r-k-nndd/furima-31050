@@ -13,6 +13,7 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
 
+  #データベースへ値を保存する
   def create
     @item = Item.new(item_params)
     if @item.save
@@ -30,9 +31,10 @@ class ItemsController < ApplicationController
 
   #商品編集ページ
   def edit
+    @item = Item.find(params[:id])
   end
 
-  #編集した情報をアップデートする
+  #データベースの情報を更新する
   def update
   end
 
