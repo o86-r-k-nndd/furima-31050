@@ -3,6 +3,9 @@ class ItemsController < ApplicationController
   #特定のアクションにのみログインしていない場合はログイン画面に遷移する処理を行う
   before_action :authenticate_user!, only: [:new, :edit]
 
+  #モデルのインスタンスの生成
+  before_action :set_item_find, only: [:show, :edit, :update]
+
   #top page
   def index
     @items = Item.all.order(id: :DESC)
@@ -26,12 +29,10 @@ class ItemsController < ApplicationController
 
   #商品詳細ページ
   def show
-    set_item_find
   end
 
   #商品編集ページ
   def edit
-    set_item_find
 
     #出品者とは違うユーザーが編集ページへ遷移しようとした時はトップページへ遷移する
     unless current_user.id == @item.user_id
@@ -42,7 +43,6 @@ class ItemsController < ApplicationController
 
   #データベースの情報を更新する
   def update
-    set_item_find
     if @item.update(item_params)
       redirect_to action: :show
     else
