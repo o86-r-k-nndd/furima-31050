@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
-  #ログインしていない場合出品画面には遷移せず、ログイン画面に遷移する
-  before_action :authenticate_user!, only: [:new]
+  #特定のアクションにのみログインしていない場合はログイン画面に遷移する処理を行う
+  before_action :authenticate_user!, only: [:new, :edit]
 
   #top page
   def index
@@ -32,18 +32,10 @@ class ItemsController < ApplicationController
   #商品編集ページ
   def edit
     @item = Item.find(params[:id])
-    
-    #URLを直接指定された時の処理にログインしているかどうかを判断する
-    if user_signed_in?
-      
-      #出品者とは違うユーザーが編集ページへ遷移しようとした時はトップページへ遷移する
-      unless current_user.id == @item.user_id
-        redirect_to root_path
-      end
 
-    else
-      #ログインしていなユーザーはログインページへ遷移する
-      redirect_to new_user_session_path
+    #出品者とは違うユーザーが編集ページへ遷移しようとした時はトップページへ遷移する
+    unless current_user.id == @item.user_id
+      redirect_to root_path
     end
 
   end
