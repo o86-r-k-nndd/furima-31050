@@ -23,4 +23,22 @@ class OrderAddress
                                                 less_than_or_equal_to:  11 }
   end
 
+  # 複数のテーブルへ保存する処理
+  def save
+    # 購入ボタンが押された商品情報を取得
+    binding.pry # 後でparamsの値を確認
+    item = Item.find(params[:item.id])
+    # 購入者情報をOrdersテーブルへ保存
+    order = Order.create(user_id: item.user.id, item_id: item.id)
+    # 購入者の住所情報をAddressesテーブルへ保存
+    Address.create( postal_code:      postal_code,
+                    municipalities:   municipalities,
+                    address:          address,
+                    building_name:    building_name,
+                    phone_number:     phone_number,
+                    delivery_area_id: delivery_area_id,
+                    order_id:         order.id)
+  end
+  # //複数のテーブルへ保存する処理
+
 end
