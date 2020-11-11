@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   #Association model
   has_many :items
+  has_many :orders
 
   #バリデーションの設定 not null
   with_options presence: true do

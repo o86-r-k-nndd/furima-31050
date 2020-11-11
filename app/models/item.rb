@@ -12,7 +12,8 @@ class Item < ApplicationRecord
   belongs_to_active_hash :delivery_day
 
   #Association model
-  belongs_to :user
+  belongs_to  :user
+  has_one     :order
 
   #validation not null
   with_options presence: true do
