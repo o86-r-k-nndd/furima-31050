@@ -9,12 +9,16 @@ class OrderAddress
                 :address,
                 :building_name,
                 :phone_number,
-                :prefectures_id
+                :delivery_area_id,
+                :user_id,
+                :item_id
 
   # OrderモデルとAddressモデルのバリデーションを定義
   with_option presence: true do
     validates :municipalities
     validates :address
+    validates :user_id
+    validates :item_id
     # ActivdHash "---"の時は保存できない
     validates :delivery_area_id  numericality: { other_than: 1 }
     # 郵便番号はハイフンを含んだ数値
@@ -25,11 +29,10 @@ class OrderAddress
 
   # 複数のテーブルへ保存する処理
   def save
-    # 購入ボタンが押された商品情報を取得
-    binding.pry # 後でparamsの値を確認
-    item = Item.find(params[:item.id])
+    binding.pry # 後でparamsの値を確認 item_idの情報なども確認
     # 購入者情報をOrdersテーブルへ保存
-    order = Order.create(user_id: item.user.id, item_id: item.id)
+    order = Order.create(user_id: user_id, item_id: item_id )
+    binding.pry # 正常に値が取得できているか確認
     # 購入者の住所情報をAddressesテーブルへ保存
     Address.create( postal_code:      postal_code,
                     municipalities:   municipalities,
