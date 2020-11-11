@@ -36,10 +36,10 @@ class OrderAddress
   def save
     # 購入する商品のをインスタンスを生成
     @item = Item.find(item_id)
-    binding.pry # インスタンスが正常に保存されているか
+
     # 購入者情報をOrdersテーブルへ保存
     order = Order.create(user_id: @item.user.id, item_id: @item.id )
-    binding.pry # 正常に値が取得できているか確認 order_id
+    
     # 購入者の住所情報をAddressesテーブルへ保存
     Address.create( postal_code:      postal_code,
                     municipalities:   municipalities,
