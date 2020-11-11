@@ -35,7 +35,8 @@
 
       <%# ログインしているが別のユーザーが出品している商品の詳細ページへアクセスした時 購入機能が未実装なので実装後機能を追加 %>
       <%# elsif 商品が出品中かどうか判断する処理 %>
-        <%# <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
+      <% else %><%#仮の処理 %>
+        <%= link_to '購入画面に進む', item_orders_path(@item.id) ,class:"item-red-btn"%>
 
       <% end %>
     <% end %>
