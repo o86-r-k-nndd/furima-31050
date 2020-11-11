@@ -13,14 +13,14 @@ class OrderAddress
 
   # OrderモデルとAddressモデルのバリデーションを定義
   with_option presence: true do
-    validates :delivery_area_id
     validates :municipalities
     validates :address
+    # ActivdHash
+    validates :delivery_area_id  numericality: { other_than: 1 }
     # 郵便番号はハイフンを含んだ数値
-    validates :postal_code,     format: {with: /\A[0-9]{3}-[0-9]{4}\z/}
-    # 電話番号は11桁以内の整数の値
-    validates :phone_number,    numericality: { only_integer:           true,
-                                                less_than_or_equal_to:  11 }
+    validates :postal_code,     format: { with: /\A[0-9]{3}-[0-9]{4}\z/ }
+    # 電話番号は11桁以内の値
+    validates :phone_number,    format: { with: /\A[0-9]{,11}\z/ }
   end
 
   # 複数のテーブルへ保存する処理
