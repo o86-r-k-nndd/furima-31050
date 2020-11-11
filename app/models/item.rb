@@ -13,7 +13,7 @@ class Item < ApplicationRecord
 
   #Association model
   belongs_to  :user
-  has_one     :order
+  has_one     :order, dependent: :destroy
 
   #validation not null
   with_options presence: true do

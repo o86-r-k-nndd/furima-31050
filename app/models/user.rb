@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   #Association model
-  has_many :items
+  has_many :items,  dependent: :destroy
   has_many :orders
 
   #バリデーションの設定 not null
