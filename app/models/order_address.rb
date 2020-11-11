@@ -4,11 +4,19 @@ class OrderAddress
   include ActiveModel::Model
 
   #OrdersテーブルとAddressesテーブルのカラムを扱える様に属性値を定義
-  attr_accessor :postal_code,
+  attr_accessor :user_id,
+                :item_id,
+                :postal_code,
                 :municipalities,
                 :address,
                 :building_name,
                 :phone_number,
-                :prefectures_id
+                :prefectures_id,
+                :order_id
+
+  #OrderモデルとAddressモデルのバリデーションを定義
+  with_option presence: true do
+    validates :postal_code
+  end
 
 end
