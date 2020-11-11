@@ -10,15 +10,15 @@ class OrderAddress
                 :building_name,
                 :phone_number,
                 :delivery_area_id,
-                :user_id,
                 :item_id
 
   # OrderモデルとAddressモデルのバリデーションを定義
   with_options presence: true do
+    
     validates :municipalities
     validates :address
-    # orderモデルの属性
-    validates :user_id
+
+    # 購入する商品のid
     validates :item_id
 
     # ActivdHash "---"の時は保存できない
@@ -34,10 +34,12 @@ class OrderAddress
 
   # 複数のテーブルへ保存する処理
   def save
-    binding.pry # 後でparamsの値を確認 item_idの情報なども確認
+    # 購入する商品のをインスタンスを生成
+    @item = Item.find(item_id)
+    binding.pry # インスタンスが正常に保存されているか
     # 購入者情報をOrdersテーブルへ保存
-    order = Order.create(user_id: user_id, item_id: item_id )
-    binding.pry # 正常に値が取得できているか確認
+    order = Order.create(user_id: @item.user.id, item_id: @item.id )
+    binding.pry # 正常に値が取得できているか確認 order_id
     # 購入者の住所情報をAddressesテーブルへ保存
     Address.create( postal_code:      postal_code,
                     municipalities:   municipalities,

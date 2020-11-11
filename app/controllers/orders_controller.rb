@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
     #   @order_address.save
     #   redirect_to root_path
     # else
-    #   render: action: :index
+       #render action: :index
     # end
   end
 
@@ -28,8 +28,7 @@ class OrdersController < ApplicationController
   #                                           :building_name,
   #                                           :phone_number,
   #                                           :delivery_area_id
-  #                                 ).merge(  :user_id: params[item.user.id],
-  #                                           :item_id: params[item.id] )
+  #                                 ).merge(  item_id: params[:item.id] )
   # end
 
 end
