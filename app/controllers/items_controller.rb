@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-  #特定のアクションにのみログインしていない場合はログイン画面に遷移する処理を行う
+  #特定のアクションにのみ、ログインしていない場合はログイン画面に遷移する処理を行う
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
 
   #モデルのインスタンスの生成
