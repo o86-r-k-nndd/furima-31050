@@ -10,6 +10,7 @@ RSpec.describe OrderAddress, type: :model do
       expect(@order_address).to be_valid
     end
 
+    # 購入者情報
     it '郵便番号は必須である' do
       @order_address.postal_code = nil
       @order_address.valid?
@@ -84,18 +85,23 @@ RSpec.describe OrderAddress, type: :model do
       @order_address.building_name = nil
       expect(@order_address).to be_valid
     end
+    # //購入者情報
 
+    # 購入した商品の情報
     it '購入した商品のID情報を保存するitem_idの値は必須である' do
       @order_address.item_id = nil
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include("Item can't be blank")
     end
+    # //購入した商品の情報
 
+    # クレジットカード決済処理
     it 'tokenは必須である' do
       @order_address.token = nil
       @order_address.valid?
       expect(@order_address.errors.full_messages).to include("Token can't be blank")
     end
+    # //クレジットカード決済処理
 
   end
 end
