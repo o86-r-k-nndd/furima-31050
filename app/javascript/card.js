@@ -11,8 +11,21 @@ const card = () => {
     // Railsのデフォルトの購入時のアクションを停止
     e.preventDefault();
 
+    // カード情報を取得する処理
+    const formResult = document.getElementById("charge-form");
+    const formData = new FormData(formResult);
+
+    const card = {
+      number: formData.get("order_address[number]"),
+      cvc: formData.get("order_address[cvc]"),
+      exp_month: formData.get("order_address[exp_month]"),
+      exp_year: `20${formData.get("order_address[exp_year]")}`,
+    };
+    // //カード情報を取得する処理
+
     console.log("card event ok");
     console.log(process.env.PAYJP_PUBLIC_KEY);
+    console.log(card)
   });
   // //商品購入ページの住所情報、カード情報取得
 };
