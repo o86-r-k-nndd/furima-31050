@@ -9,10 +9,9 @@
     <div class='item-img-content'>
       <%= image_tag @item.image ,class:"item-box-img" %>
       <div class='sold-out'>
-        <%# 商品購入機能未実装なので実装後に追加 %>
-        <%# if 購入されていた時の処理 %>
-          <%# <span>Sold Out!!</span> %>
-        <%# end %>
+        <% if @item.order.nil? %>
+          <% <span>Sold Out!!</span> %>
+        <% end %>
       </div>
     </div>
     <div class="item-price-box">
@@ -27,15 +26,14 @@
     <%# ユーザーがログインしている時に行う処理 %>
     <% if user_signed_in? %>
 
-      <%# ログインしているユーザーが出品している商品の詳細ページへアクセスした時 %>
+      <%# 出品者が自身の出品している商品の詳細ページへアクセスした時 %>
       <% if current_user.id == @item.user_id %>
         <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
         <p class='or-text'>or</p>
         <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
 
-      <%# ログインしているが別のユーザーが出品している商品の詳細ページへアクセスした時 購入機能が未実装なので実装後機能を追加 %>
-      <%# elsif 商品が出品中かどうか判断する処理 %>
-      <%else%>
+      <%# 他のユーザーが出品した商品の詳細ページへ遷移した時%>
+      <% elsif current_user.id != @item.user_id %>
         <%= link_to '購入画面に進む', item_orders_path(@item.id) ,class:"item-red-btn"%>
 
       <% end %>

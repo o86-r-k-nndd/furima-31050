@@ -138,10 +138,9 @@
               <%= image_tag item.image, class: "item-img" %>
 
               <div class='sold-out'>
-                <%# 今回の実装条件に含まれていないので非表示にする%>
-                <%# if 購入されていた時の処理 %>
-                  <%# <span>Sold Out!!</span> %>
-                <%# end %>
+                <% if item.order.nil? %>
+                  <% <span>Sold Out!!</span> %>
+                <% end %>
               </div>
 
             </div>
