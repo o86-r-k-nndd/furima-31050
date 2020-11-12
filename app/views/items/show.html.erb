@@ -23,8 +23,8 @@
       </span>
     </div>
 
-    <%# ユーザーがログインしている時に行う処理 %>
-    <% if user_signed_in? %>
+    <%# ユーザーがログインしていて尚且つ商品が購入されていない時に行う処理 %>
+    <% if user_signed_in? && @item.order.nil? %>
 
       <%# 出品者が自身の出品している商品の詳細ページへアクセスした時 %>
       <% if current_user.id == @item.user_id %>
@@ -33,13 +33,12 @@
         <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
 
       <%# 他のユーザーが出品した商品の詳細ページへ遷移した時%>
-        <% unless @item.order.nil?%>
-          <%= link_to '購入画面に進む', item_orders_path(@item.id) ,class:"item-red-btn"%>
-        <% end %>
+      <% else %>
+        <%= link_to '購入画面に進む', item_orders_path(@item.id) ,class:"item-red-btn"%>
 
       <% end %>
     <% end %>
-    <%# //ユーザーがログインしている時に行う処理 %>
+    <%# //ユーザーがログインしていて尚且つ商品が購入されていない時に行う処理 %>
 
     <div class="item-explain-box">
       <span><%= @item.explanation %></span>
