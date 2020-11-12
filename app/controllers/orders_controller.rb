@@ -16,11 +16,12 @@ class OrdersController < ApplicationController
 
   # 購入処理
   def create
-    binding.pry
+
     @order_address = OrderAddress.new(order_params)
 
     if form_valid?
       @order_address.save
+      pay_item
       redirect_to root_path
 
     else
@@ -70,6 +71,19 @@ class OrdersController < ApplicationController
     unless @item_sold.order.nil?
       redirect_to root_path
     end
+  end
+
+  # PAY.JPを用いた購入処理
+  def pay_item
+    @item_price = Item.find(params[:item_id])
+    
+    # トークンの送信
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @item_price.price,
+      card: order_params[:token],
+      currency: 'jpy'
+    )
   end
 
 end
