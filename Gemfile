@@ -78,3 +78,6 @@ gem 'active_hash'
 group :production do
   gem 'rails_12factor'
 end
+
+#外部API PAY.JP を導入
+gem 'payjp'
