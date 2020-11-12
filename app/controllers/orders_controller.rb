@@ -1,5 +1,8 @@
 class OrdersController < ApplicationController
 
+  # 指定したアクションに対して ログインしていない場合はログイン画面へ遷移する処理を行う
+  before_action :authenticate_user!, only: [:index, :create]
+
   # 購入ページ表示
   def index
     set_action_index
