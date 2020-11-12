@@ -16,14 +16,18 @@ class OrdersController < ApplicationController
 
   # 購入処理
   def create
+
     @order_address = OrderAddress.new(order_params)
+
     if form_valid?
       @order_address.save
       redirect_to root_path
+
     else
       set_new_form
       form_valid?
       render action: :index
+      
     end
   end
 

@@ -34,6 +34,11 @@ class ItemsController < ApplicationController
   #商品編集ページ
   def edit
 
+    #購入済みの商品を編集しようとした時はトップページへ遷移する
+    unless @item.order.nil?
+      redirect_to root_path
+    end
+    
     #出品者とは違うユーザーが編集ページへ遷移しようとした時はトップページへ遷移する
     unless current_user.id == @item.user_id
       redirect_to root_path
