@@ -41,14 +41,8 @@ const cardPay = () => {
       document.getElementById("card-exp-month").removeAttribute("name");
       document.getElementById("card-exp-year").removeAttribute("name");
 
-      const ceDomNum = document.getElementById("card-number").removeAttribute("name");
-      const ceDomCvc = document.getElementById("card-cvc").removeAttribute("name");
-      const ceDomMon = document.getElementById("card-exp-month").removeAttribute("name");
-      const ceDomYea = document.getElementById("card-exp-year").removeAttribute("name");
-      console.log(ceDomNum);
-      console.log(ceDomCvc);
-      console.log(ceDomMon);
-      console.log(ceDomYea);
+      // フォームの送信ボタンをJavaScript上で実行する処理
+      document.getElementById("charge-form").submit();
 
     });
     // //カード情報のトークン化を行う処理
