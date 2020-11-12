@@ -138,8 +138,8 @@
               <%= image_tag item.image, class: "item-img" %>
 
               <div class='sold-out'>
-                <% if item.order.nil? %>
-                  <% <span>Sold Out!!</span> %>
+                <% unless item.order.nil? %>
+                  <span>Sold Out!!</span>
                 <% end %>
               </div>
 

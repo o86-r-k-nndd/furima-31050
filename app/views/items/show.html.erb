@@ -9,8 +9,8 @@
     <div class='item-img-content'>
       <%= image_tag @item.image ,class:"item-box-img" %>
       <div class='sold-out'>
-        <% if @item.order.nil? %>
-          <% <span>Sold Out!!</span> %>
+        <% unless @item.order.nil? %>
+          <span>Sold Out!!</span>
         <% end %>
       </div>
     </div>
@@ -33,8 +33,9 @@
         <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
 
       <%# 他のユーザーが出品した商品の詳細ページへ遷移した時%>
-      <% elsif current_user.id != @item.user_id %>
-        <%= link_to '購入画面に進む', item_orders_path(@item.id) ,class:"item-red-btn"%>
+        <% unless @item.order.nil?%>
+          <%= link_to '購入画面に進む', item_orders_path(@item.id) ,class:"item-red-btn"%>
+        <% end %>
 
       <% end %>
     <% end %>
