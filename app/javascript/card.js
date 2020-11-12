@@ -23,6 +23,16 @@ const card = () => {
     };
     // //カード情報を取得する処理
 
+    // カード情報のトークン化を行う処理
+    Payjp.createToken(card, (status, response) => {
+      if (status == 200) {
+        const token = response.id;
+        console.log("token ok");
+        console.log(token);
+      }
+    });
+    // //カード情報のトークン化を行う処理
+
     console.log("card event ok");
     console.log(process.env.PAYJP_PUBLIC_KEY);
     console.log(card)
