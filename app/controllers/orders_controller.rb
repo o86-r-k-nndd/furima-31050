@@ -8,12 +8,12 @@ class OrdersController < ApplicationController
   # 購入処理
   def create
     @order_address = OrderAddress.new(order_params)
-    binding.pry
-    if @order_address.valid?
+    if order_valid?
       @order_address.save
       redirect_to root_path
     else
       set_action_index
+      order_valid?
       render action: :index
     end
   end
@@ -35,6 +35,11 @@ class OrdersController < ApplicationController
   def set_action_index
     @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new
+  end
+
+  # OrderAddressモデルのバリデーションが正常に動作しているか確認する
+  def order_valid?
+    @order_address.valid?
   end
 
 end
