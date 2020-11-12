@@ -26,9 +26,13 @@ const card = () => {
     // カード情報のトークン化を行う処理
     Payjp.createToken(card, (status, response) => {
       if (status == 200) {
+        // トークン情報の取得
         const token = response.id;
-        console.log("token ok");
-        console.log(token);
+        
+        // トークンの情報をHTML要素へ埋め込む処理
+        const renderDom = document.getElementById("charge-form");
+        const tokenObj = `<input value=${token} name='token' type="hidden"> `;
+        renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
     });
     // //カード情報のトークン化を行う処理
