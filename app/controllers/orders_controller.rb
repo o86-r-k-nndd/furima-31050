@@ -16,7 +16,7 @@ class OrdersController < ApplicationController
 
   # 購入処理
   def create
-
+    binding.pry
     @order_address = OrderAddress.new(order_params)
 
     if form_valid?
@@ -41,7 +41,8 @@ class OrdersController < ApplicationController
                                             :building_name,
                                             :phone_number,
                                             :delivery_area_id
-                                  ).merge(  item_id: params[:item_id] )
+                                  ).merge(  item_id:  params[:item_id],
+                                            token:    params[:token] )
   end
 
   # indexアクションを行う時に呼び出すインスタンスを取得するメソッド

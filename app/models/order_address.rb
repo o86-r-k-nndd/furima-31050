@@ -10,7 +10,8 @@ class OrderAddress
                 :building_name,
                 :phone_number,
                 :delivery_area_id,
-                :item_id
+                :item_id,
+                :token
 
   # OrderモデルとAddressモデルのバリデーションを定義
   with_options presence: true do
@@ -18,6 +19,9 @@ class OrderAddress
     validates :municipalities
     validates :address
 
+    # クレジットカードのトークンの情報
+    validates :token
+    
     # 購入する商品のid
     validates :item_id
 
