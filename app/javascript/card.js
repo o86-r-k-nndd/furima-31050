@@ -1,5 +1,5 @@
 // クレジットカード決済機能
-const card = () => {
+const cardPay = () => {
 
   // 外部API PAY.JPの処理を行うための鍵の設定
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
@@ -34,14 +34,27 @@ const card = () => {
         const tokenObj = `<input value=${token} name='token' type="hidden"> `;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
+
+      // 入力されたカード情報を削除する処理
+      document.getElementById("card-number").removeAttribute("name");
+      document.getElementById("card-cvc").removeAttribute("name");
+      document.getElementById("card-exp-month").removeAttribute("name");
+      document.getElementById("card-exp-year").removeAttribute("name");
+
+      const ceDomNum = document.getElementById("card-number").removeAttribute("name");
+      const ceDomCvc = document.getElementById("card-cvc").removeAttribute("name");
+      const ceDomMon = document.getElementById("card-exp-month").removeAttribute("name");
+      const ceDomYea = document.getElementById("card-exp-year").removeAttribute("name");
+      console.log(ceDomNum);
+      console.log(ceDomCvc);
+      console.log(ceDomMon);
+      console.log(ceDomYea);
+
     });
     // //カード情報のトークン化を行う処理
 
-    console.log("card event ok");
-    console.log(process.env.PAYJP_PUBLIC_KEY);
-    console.log(card)
   });
   // //商品購入ページの住所情報、カード情報取得
 };
 
-window.addEventListener("load", card);
+window.addEventListener("load", cardPay);
