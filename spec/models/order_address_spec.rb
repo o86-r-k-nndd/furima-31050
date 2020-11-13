@@ -3,7 +3,10 @@ require 'rails_helper'
 RSpec.describe OrderAddress, type: :model do
   describe 'Formオブジェクトを用いた複数のモデルへの保存' do
     before do
-      @order_address = FactoryBot.build(:order_address)
+      @item = FactoryBot.create(:item)
+      @order_address = FactoryBot.build(:order_address, item_id: @item.id)
+      # 環境依存のエラーが発生為、解決のために記述
+      sleep 1
     end
 
     it '全ての値が正しく入力されていれば保存できる' do
