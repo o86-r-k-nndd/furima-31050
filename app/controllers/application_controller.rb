@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   #ベーシック認証を行う処理
   def basic_auth
     authenticate_or_request_with_http_basic do |username, password|
-      username == 'admin' && password == '2222'
+      username == ENV["BASIC_AUTH_USER_FURIMA"] && password == ENV["BASIC_AUTH_PASSWORD_FURIMA"]
     end
   end
 end
