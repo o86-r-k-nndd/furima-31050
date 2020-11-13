@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
 
-  #特定のアクションにのみログインしていない場合はログイン画面に遷移する処理を行う
+  #特定のアクションにのみ、ログインしていない場合はログイン画面に遷移する処理を行う
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
 
   #モデルのインスタンスの生成
@@ -34,6 +34,11 @@ class ItemsController < ApplicationController
   #商品編集ページ
   def edit
 
+    #購入済みの商品を編集しようとした時はトップページへ遷移する
+    unless @item.order.nil?
+      redirect_to root_path
+    end
+    
     #出品者とは違うユーザーが編集ページへ遷移しようとした時はトップページへ遷移する
     unless current_user.id == @item.user_id
       redirect_to root_path
