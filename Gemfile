@@ -81,3 +81,6 @@ end
 
 #外部API PAY.JP を導入
 gem 'payjp'
+
+#AWSのS3を利用する
+gem "aws-sdk-s3", require: false
