@@ -1,83 +1,156 @@
-# DB設計
+# Furima-31050
 
-## users table
-ユーザー管理機能
-
-| Column             | Type    | Options                   |
-| ------------------ | ------- | ------------------------- |
-| nickname           | string  | null: false               |
-| email              | string  | null: false, unique: true |
-| encrypted_password | string  | null: false               |
-| first_name         | string  | null: false               |
-| last_name          | string  | null: false               |
-| first_name_kana    | string  | null: false               |
-| last_name_kana     | string  | null: false               |
-| birthday           | date    | null: false               |
+## アプリケーション概要
+フリーマーケットのアプリケーションを作成しました。ユーザーを登録すると商品を出品できるようになります。自身が出品した商品は、編集と削除をすることができます。他のユーザーが出品した商品は、クレジットカードを用いて購入することができます。
 
 
-### Association
-_ has_many :items
-_ has_many :orders
+## URL
+https://furima-31050.herokuapp.com/
 
-## items table
+## テストアカウント
+* 購入者用
+* メールアドレス: buyer_user@gmail.com
+* パスワード: buyeruser86
+* 購入用カード情報
+* 番号：4242424242424242
+* 期限：24/11
+* セキュリティコード：123
+* 出品者用
+* メールアドレス名: seller_user@gmail.com
+* パスワード: selleruser86
+
+
+## Basic認証
+* Username `ontech31050`
+* Password `86on31050`
+
+## 利用方法
+* WebブラウザGoogle Chromeの最新版を利用してアクセスしてください。
+* ただしデプロイ等で接続できないタイミングもございます。その際は少し時間をおいてから接続してください。
+* 接続先およびログイン情報については、上記の通りです。
+* 同時に複数の方がログインしている場合に、ログインできない可能性があります。
+* 出品方法
+* テストアカウントでログイン→トップページから出品ボタン押下→商品情報入力→商品出品
+* 購入方法
+* テストアカウントでログイン→トップページから商品検索→商品選択→商品購入
+* 確認後、ログアウト処理をお願いします。
+
+
+## 目指した課題解決
+* 既存のフリマアプリでは購入、出品には煩雑な処理が必要でなので、より簡単に購入、出品を行う事ができるようにする
+
+## 要件定義
+
+### デプロイ
+
+* ユーザーがサイトへアクセスできるようにする
+
+### DB設計
+
+* READMEの作成
+* ER図の作成
+
+### ユーザー管理機能
+ 
+* Deviseを用いたユーザー管理機能の実装
+* ログイン、ログアウト、新規登録機能の実装
+* ログインしていないユーザーは特定の画面へ遷移した時ログイン画面へ遷移するように設定する
+
+### 商品出品機能
+
+* ログインしているユーザーのみが商品を出品する事ができる
+* 商品を出品する際は、商品の画像、商品の名前、商品の説明、商品のカテゴリー、商品の状態、商品の配送料の負担、商品の発送までの日数、、商品の価格の入力をする必要がある
+* 価格の範囲が、¥300~¥9,999,999の間であり、販売価格は半角数字のみ保存可能であるバリデーションを設定する
+
+### 商品一覧表示機能
+
+* 出品された商品をトップページに一覧表示する機能の実装を行う
+* 出品された商品情報は上から新しい順に表示され、画像、価格、商品名の情報が表示される
+
+### 商品詳細表示機能
+
+* 詳細画面では、ログイン状態の出品者のみに編集、削除のボタンが表示される
+* ログイン状態の出品者以外のユーザーは購入画面へ進むボタンが表示される
+* ログアウト状態のユーザーでも商品詳細ページに遷移する事ができる
+* ログアウト状態のユーザーは商品の編集、削除、購入画面へ遷移するボタンが表示されない
+* 商品詳細ページでは登録した情報が見られるようになっている
+
+### 商品編集機能
+
+* ログインしている出品者は商品詳細ページから編集ページに遷移する事ができる
+* ログインしている出品者以外のユーザーが直接編集ページに遷移しようとした場合は、トップページに遷移する
+* ログインしていないユーザーが直接編集ページに遷移しようとした場合は、ログインページに遷移する
+* 編集ページには元々入力された値が表示されていて、何も変更せずに更新ボタンを押しても画像なしの商品にならない
+
+### 商品削除機能
+
+* 商品の詳細ページに表示されている削除ボタンをクリックする事で商品情報を出品者のみが商品を削除する事ができる
+
+### 商品購入機能
+
+* クレジットカード決済ができる事
+* クレジットカードの情報を都度入力が必須であり、正しい情報が入力されない時は決済ができない
+* 配送先の情報として、郵便番号、都道府県、市町村、番地、電話番号を都度入力する事が必須です
+* 郵便番号にはハイフンが必要です
+* 電話番号にはハイフンは不要で11桁いないである事
+* ログアウトしているユーザーが商品購入ページへ遷移しようとすると、ログインページに遷移する
+* ログイン状態のユーザーが自身の出品した商品の購入ページに遷移しようとすると、トップページに遷移する
+
+### Basic認証
+
+* ユーザーがアプリケーションへアクセスをした時、Basic認証による認証をおこなう
+
+## 実装した機能
+
+### ユーザー管理機能
+<img width="1344" alt="スクリーンショット 2020-11-28 22 08 35" src="https://user-images.githubusercontent.com/72374715/100516444-37d6a980-31c7-11eb-979e-9e978482fb42.png">
+新規登録
+<img width="1344" alt="スクリーンショット 2020-11-28 21 51 35" src="https://user-images.githubusercontent.com/72374715/100516074-8171c500-31c4-11eb-8da2-82f9d1c081c6.png">
+ログイン機能
+
+### 商品出品機能
+<img width="1344" alt="スクリーンショット 2020-11-28 21 52 52" src="https://user-images.githubusercontent.com/72374715/100516088-9e0dfd00-31c4-11eb-898b-f4b308930845.png">
+<img width="1344" alt="スクリーンショット 2020-11-28 21 52 56" src="https://user-images.githubusercontent.com/72374715/100516089-a403de00-31c4-11eb-8773-7d0e7941aec6.png">
 商品出品機能
 
-| Column           | Type         | Options                        |
-| ---------------- | ------------ | ------------------------------ |
-| explanation      | text         | null: false                    |
-| name             | string       | null: false                    |
-| category_id      | integer      | null: false                    |
-| status_id        | integer      | null: false                    |
-| shipping_id      | integer      | null: false                    |
-| delivery_area_id | integer      | null: false                    |
-| delivery_day_id  | integer      | null: false                    |
-| price            | integer      | null: false                    |
-| user             | references   | null: false, foreign_key: true |
+### 商品一覧表示機能
+<img width="1344" alt="スクリーンショット 2020-11-28 18 51 16" src="https://user-images.githubusercontent.com/72374715/100516060-5be4bb80-31c4-11eb-97e3-ea439923a809.png">
+一覧表示機能
 
-### Association
-_ belongs_to           :user
-_ has_one              :order
+### 商品詳細表示機能
+<img width="1344" alt="スクリーンショット 2020-11-28 21 53 33" src="https://user-images.githubusercontent.com/72374715/100516129-f93fef80-31c4-11eb-8a40-44c26b834bed.png">
+出品者以外のユーザーが詳細画面へ遷移する
+<img width="1344" alt="スクリーンショット 2020-11-28 21 54 25" src="https://user-images.githubusercontent.com/72374715/100516135-0fe64680-31c5-11eb-97f6-13dd4a5afe63.png">
+出品者が詳細画面へ遷移する
 
-### Association ActiveStorage
-_ has_one_attached     :image
+### 商品編集機能
+<img width="1344" alt="スクリーンショット 2020-11-28 22 01 12" src="https://user-images.githubusercontent.com/72374715/100516265-0f01e480-31c6-11eb-849f-6e1e595e844f.png">
+商品編集機能
 
-### Association ActiveHash
-belongs_to_active_hash :category
-belongs_to_active_hash :status
-belongs_to_active_hash :shipping
-belongs_to_active_hash :delivery_area
-belongs_to_active_hash :delivery_day
+### 商品削除機能
+<img width="1344" alt="スクリーンショット 2020-11-28 21 54 25" src="https://user-images.githubusercontent.com/72374715/100516135-0fe64680-31c5-11eb-97f6-13dd4a5afe63.png">
+商品削除機能
 
+### 商品購入機能
+<img width="1344" alt="スクリーンショット 2020-11-28 22 02 18" src="https://user-images.githubusercontent.com/72374715/100516283-1a551000-31c6-11eb-9d8f-74ed8fafcaaf.png">
+<img width="1344" alt="スクリーンショット 2020-11-28 22 02 38" src="https://user-images.githubusercontent.com/72374715/100516291-293bc280-31c6-11eb-8ecc-aabb2ed209cd.png">
+商品購入機能
 
-# orders table
-購入者の情報
+### Basic認証
+<img width="1344" alt="スクリーンショット 2020-11-28 22 14 40" src="https://user-images.githubusercontent.com/72374715/100516462-62286700-31c7-11eb-83de-d3fd64d87b2c.png">
+Basic認証
 
-| Column         | Type       | Options                        |
-| -------------- | ---------- | ------------------------------ |
-| user           | references | null: false, foreign_key: true |
-| item           | references | null: false, foreign_key: true |
+## データベース設計
+![DB drawio](https://user-images.githubusercontent.com/72374715/100516540-f5fa3300-31c7-11eb-8445-6caf61c25c42.png)
 
-### Association
-_ belongs_to :user
-_ belongs_to :item
-_ has_one    :address
+## ローカル環境での動作方法
+* `% git clone https://github.com/o86-r-k-nndd/furima-31050.git`
+* `% cd furima-31050`
+* `% bundle install`
+* `% rails db:create`
+* `% rails db:migrate`
 
-## addresses table
-商品者住所情報
-
-| Column           | Type       | Options                        |
-| --------------   | ---------- | ------------------------------ |
-| postal_code      | string     | null: false                    |
-| municipalities   | string     | null: false                    |
-| address          | string     | null: false                    |
-| building_name    | string     |                                |
-| phone_number     | string     | null: false                    |
-| delivery_area_id | integer    | null: false                    |
-| order            | references | null: false, foreign_key: true |
-
-
-### Association
-_ belongs_to :order
-
-### Association ActiveHash
-belongs_to_active_hash :delivery_area
+### 開発環境
+* `Ruby 6.0.0`
+* `Ruby on Rails`
+* `mysql`
